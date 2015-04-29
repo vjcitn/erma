@@ -1,7 +1,7 @@
 
 mapmeta = function() {
   tab = read.csv(
-   dir(system.file("metadata_csv",package="erma"), full=TRUE), 
+   dir(system.file("metadata_csv",package="erma"), full.names=TRUE), 
          stringsAsFactors=FALSE)
  sexcol = grep("SEX", colnames(tab))
  colnames(tab)[sexcol] = "SEX"

@@ -1,10 +1,14 @@
 import(methods)
+import(ggplot2)
 import(GenomicFiles)
 import(GenomicRanges)
+import(Homo.sapiens)
+import(BiocGenerics)
 
-exportPattern("..*")
+export(genemodel, makeErmaSet, stateProfile,
+   mapmeta)
 
 importClassFrom("S4Vectors", "DataFrame")
 importFrom("S4Vectors", "DataFrame")
-exportClass("narrDF")
+exportClass("ErmaSet")
 importFrom("rtracklayer", "import")

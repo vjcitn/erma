@@ -1,8 +1,8 @@
 stateProfile = function(ermaset, symbol="IL33", width=50000,
-    ctsize=7, shortCellType=TRUE) {
+    ctsize=7, shortCellType=TRUE, extension=0) {
    mod = try(genemodel(symbol))
    if (inherits(mod, "try-error")) stop("can't resolve symbol")
-   uil = flank(resize(range(mod), 1), width=width)
+   uil = flank(resize(range(mod), 1), width=width)+extension
    
    ## ----bind----------------------------------------------------------------
    rowRanges(ermaset) = uil
@@ -21,8 +21,10 @@ stateProfile = function(ermaset, symbol="IL33", width=50000,
    
    ## ----doviz, fig=TRUE-----------------------------------------------------
    cssgr = unlist(GRangesList(csstates))
-   data(short_celltype)
-   data(states_25)
+#   data(short_celltype)
+   short_celltype = get(load(dir(system.file("data",package="erma"),full.names=TRUE, pattern="short")))
+   states_25 = get(load(dir(system.file("data",package="erma"),full.names=TRUE, pattern="states_25")))
+#   data(states_25)
    mycol = states_25$rgb
    names(mycol) = paste0(1:25, "_", states_25$MNEMONIC)
    cssd = as.data.frame(cssgr)

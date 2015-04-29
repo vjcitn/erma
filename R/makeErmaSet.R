@@ -9,7 +9,7 @@ makeErmaSet = function() {
  ermaset = 
   GenomicFiles(  
     files=dir(system.file("bed_tabix", package="erma"), 
-                full=TRUE, patt="gz$")
+                full.names=TRUE, pattern="gz$")
   )
  mm = mapmeta()
  rownames(mm) = mm[,2]
