@@ -1,10 +1,10 @@
 Package: erma
 Title: epigenomic road map adventures
-Version: 0.0.6
+Version: 0.0.7
 Author: VJ Carey <stvjc@channing.harvard.edu>
 Description: Software and data to support
 	epigenomic road map adventures.
-Suggests: 
+Suggests: rmarkdown, BiocStyle, knitr
 Depends: methods, Homo.sapiens
 Imports: GenomicFiles, rtracklayer, S4Vectors, BiocGenerics,
 	GenomicRanges, ggplot2
@@ -12,3 +12,4 @@ Maintainer: VJ Carey <stvjc@channing.harvard.edu>
 License: Artistic-2.0
 LazyLoad: yes
 BiocViews: epigenetics, panomics, annotation, chipseq
+VignetteEngine: knitr
