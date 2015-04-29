@@ -1,0 +1,8 @@
+import(methods)
+import(GenomicFiles)
+
+exportPattern("..*")
+
+importClassFrom("S4Vectors", "DataFrame")
+importFrom("S4Vectors", "DataFrame")
+exportClass("narrDF")

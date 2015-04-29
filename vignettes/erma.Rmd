@@ -1,0 +1,131 @@
+---
+title: "erma: epigenomics road map adventures"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "February 2015"
+output:
+  BiocStyle::pdf_document:
+    toc: yes
+    number_sections: yes
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{xyz}
+-->
+
+```{r style, echo = FALSE, results = 'asis'}
+BiocStyle::markdown()
+```
+```{r dosetup,echo=FALSE,results="hide"}
+suppressPackageStartupMessages({
+library(erma)
+library(GenomicFiles)
+library(ggplot2)
+library(grid)
+library(png)
+})
+```
+
+# Introduction
+
+The epigenomics road map describes locations of epigenetic
+marks in DNA from a variety of cell types.  Of interest are
+locations of
+histone modifications, sites of DNA methylation,
+and regions of accessible chromatin.
+
+This package presents a selection of elements of the road 
+map including metadata and outputs of the ChromImpute
+procedure applied to ENCODE cell lines by [Ernst and Kellis](http://dx.doi.org/10.1038/nbt.3157).
+
+# Metadata on the ChromImpute archive
+
+## Sample metadata
+
+I have retrieved a [Google Docs spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0Am6FxqAtrFDwdHU1UC13ZUxKYy1XVEJPUzV6MEtQOXc&usp=sharing#gid=15) 
+with comprehensive information.  The mapmeta() function provides
+access to a local DataFrame image of the file as retrieved in mid April
+2015.
+
+```{r lkm}
+library(erma)
+meta = mapmeta()
+meta
+```
+
+We can see the range of tissue types studied:
+```{r lktiss}
+meta[order(meta[,15]),c(2,15)][1:3,]
+sort(meta[,15])
+```
+
+## Metadata on the inferred states
+
+The chromatin states and standard colorings
+used are enumerated in `states_25`:
+```{r lkst}
+data(states_25)
+head(states_25)
+```
+
+The emission parameters of the 25 state model are depicted
+in the supplementary Figure 33 of Ernst and Kellis:
+
+```{r dofig,fig=TRUE}
+library(png)
+im = readPNG(system.file("pngs/emparms.png", package="erma"))
+grid.raster(im)
+``` 
+
+# Managing access to imputed chromatin states for a set of cell types
+
+I have retrieved a modest number of roadmap bed files with ChromImpute
+mnemonic labeling of chromatin by states.  These can be
+managed with an ErmaSet instance,
+a trivial extension of `r Biocpkg("GenomicFiles")` class.
+
+```{r getgf}
+ermaset = makeErmaSet()
+ermaset
+cellTypes(ermaset)
+```
+
+# Enumerating states in the vicinity of a gene, across cell types
+
+We form a GRanges representing 50kb upstream of IL33.
+```{r getgm, cache=TRUE}
+uil33 = flank(resize(range(genemodel("IL33")), 1), width=50000)
+uil33
+```
+Bind this to the ErmaSet instance.
+```{r bind}
+rowRanges(ermaset) = uil33
+ermaset
+```
+
+Now query the files for cell-specific states in this interval.
+
+```{r getcss}
+csstates = lapply(reduceByFile(ermaset, MAP=function(range, file) {
+  imp = import(file, which=range)
+  imp$rgb = rgbByState(imp$name)
+  imp
+}), "[[", 1) 
+tys = cellTypes(ermaset)  # need to label with cell types
+csstates = lapply(1:length(csstates), function(x) {
+   csstates[[x]]$celltype = tys[x]
+   csstates[[x]]
+   })
+```
+Finally, a rough visualization with ggplot2.
+```{r doviz, fig=TRUE}
+stateProfile(ermaset, symbol="CD28")
+```
+
+
+
