@@ -39,9 +39,9 @@ a \code{\link[GenomicRanges]{GRanges}} instance
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 %\author{
 %%  ~~who you are~~
 %}

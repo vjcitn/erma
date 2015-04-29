@@ -27,9 +27,9 @@ non-ascii elements of prime notations
 \source{
 retrieved from \url{http://egg2.wustl.edu/roadmap/web_portal/imputed.html#chr_imp} 28 April 2015
 }
-\references{
+%\references{
 %%  ~~ possibly secondary sources and usages ~~
-}
+%}
 \examples{
 data(states_25)
 ## maybe str(states_25) ; plot(states_25) ...
