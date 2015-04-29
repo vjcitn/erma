@@ -23,6 +23,7 @@ BiocStyle::markdown()
 ```
 ```{r dosetup,echo=FALSE,results="hide"}
 suppressPackageStartupMessages({
+library(BiocStyle)
 library(erma)
 library(GenomicFiles)
 library(ggplot2)
