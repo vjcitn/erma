@@ -1,8 +1,10 @@
 \name{states_25}
 \alias{states_25}
+\alias{short_celltype}
 \docType{data}
 \title{
-metadata on states of 25-state model of chromatin from ChromImpute
+metadata on states of 25-state model of chromatin from ChromImpute,
+and on cell types in the epigenome road map of April 2015
 }
 \description{
 metadata on states of 25-state model of chromatin from ChromImpute
