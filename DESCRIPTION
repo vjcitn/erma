@@ -12,4 +12,4 @@ Maintainer: VJ Carey <stvjc@channing.harvard.edu>
 License: Artistic-2.0
 LazyLoad: yes
 BiocViews: epigenetics, panomics, annotation, chipseq
-VignetteEngine: knitr
+VignetteBuilder: knitr

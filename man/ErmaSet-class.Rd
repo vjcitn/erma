@@ -3,6 +3,7 @@
 \docType{class}
 \alias{ErmaSet-class}
 \alias{makeErmaSet}
+\alias{cellTypes}
 \alias{cellTypes,ErmaSet-method}
 
 \title{Class \code{"ErmaSet"}}

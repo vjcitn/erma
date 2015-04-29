@@ -15,7 +15,7 @@ stateProfile(ermaset, symbol = "IL33", width = 50000, ctsize = 7, shortCellType 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ermaset}{
-instance of \S4class{ErmaSet-class}
+instance of \code{\link[erma]{ErmaSet-class}}
 }
   \item{symbol}{
 gene symbol resolvable in \code{\link[Homo.sapiens]{Homo.sapiens}}

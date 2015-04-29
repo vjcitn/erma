@@ -6,7 +6,7 @@ import(Homo.sapiens)
 import(BiocGenerics)
 
 export(genemodel, makeErmaSet, stateProfile,
-   mapmeta)
+   mapmeta, cellTypes)
 
 importClassFrom("S4Vectors", "DataFrame")
 importFrom("S4Vectors", "DataFrame")
