@@ -26,12 +26,14 @@ stateProfile = function(ermaset, symbol="IL33", width=50000,
    mycol = states_25$rgb
    names(mycol) = paste0(1:25, "_", states_25$MNEMONIC)
    cssd = as.data.frame(cssgr)
+   chrn = as.character(seqnames(cssgr))[1]
    if (shortCellType) cssd$celltype = short_celltype[ cssd$celltype ]
    n2 = ggplot(cssd)
    n2 + geom_rect(aes(ymin=0, ymax=1, xmin=start, xmax=end, fill=name)) + 
        facet_grid(celltype~.) +
        theme(strip.text.y = element_text(size = ctsize, angle = 0)) +
         ylim(0,1) + scale_y_continuous(breaks=NULL, limits=c(0,1)) +
-        scale_fill_manual( name="state", values=mycol )
+        scale_fill_manual( name="state", values=mycol ) + xlab(chrn) +
+        ggtitle(paste0(symbol, "(", floor(width/1000), "kb upstream)"))
 }
    

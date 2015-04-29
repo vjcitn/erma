@@ -1,8 +1,10 @@
 import(methods)
 import(GenomicFiles)
+import(GenomicRanges)
 
 exportPattern("..*")
 
 importClassFrom("S4Vectors", "DataFrame")
 importFrom("S4Vectors", "DataFrame")
 exportClass("narrDF")
+importFrom("rtracklayer", "import")

@@ -23,6 +23,7 @@ BiocStyle::markdown()
 ```
 ```{r dosetup,echo=FALSE,results="hide"}
 suppressPackageStartupMessages({
+library(rtracklayer)
 library(BiocStyle)
 library(erma)
 library(GenomicFiles)
