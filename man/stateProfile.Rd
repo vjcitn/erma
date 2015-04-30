@@ -1,5 +1,6 @@
 \name{stateProfile}
 \alias{stateProfile}
+\alias{stateProf}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 create a ggplot2 visualization of states over genomic addresses
@@ -11,6 +12,7 @@ for a family of cell types managed in an ErmaSet instance.
 }
 \usage{
 stateProfile(ermaset, symbol = "IL33", width = 50000, ctsize = 7, shortCellType = TRUE)
+stateProf()
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -31,9 +33,9 @@ logical, if FALSE, full cell type labels are used, otherwise
 ad hoc abbreviations are used for facet labeling
 }
 }
-%\details{
-%%  ~~ If necessary, more details than the description above ~~
-%}
+\details{
+stateProf is a demonstration shiny app calling stateProfile
+}
 \value{
 instance of c("gg", "ggplot")
 %%%  ~Describe the value returned

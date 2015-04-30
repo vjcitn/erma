@@ -5,7 +5,7 @@ import(GenomicRanges)
 import(Homo.sapiens)
 import(BiocGenerics)
 
-export(genemodel, makeErmaSet, stateProfile,
+export(genemodel, makeErmaSet, stateProfile, stateProf,
    mapmeta, cellTypes)
 
 importClassFrom("S4Vectors", "DataFrame")
