@@ -1,5 +1,5 @@
 
-stateProf = function() {
+stateProfOLD = function() {
 message("NOTE: takes some time to initialize for 40000 promoter regions")
 ver = R.version
  if (ver$minor <= "1.3") {

@@ -111,11 +111,12 @@ ermaset
 ```
 
 Now query the files for cell-specific states in this interval.
+While GenomicFiles reduce operations are failing, let's skip them.
 
-```{r getcss}
+```{r getcss,eval=FALSE}
 csstates = lapply(reduceByFile(ermaset, MAP=function(range, file) {
   imp = import(file, which=range)
-  imp$rgb = rgbByState(imp$name)
+  imp$rgb = erma:::rgbByState(imp$name)
   imp
 }), "[[", 1) 
 tys = cellTypes(ermaset)  # need to label with cell types
@@ -123,6 +124,19 @@ csstates = lapply(1:length(csstates), function(x) {
    csstates[[x]]$celltype = tys[x]
    csstates[[x]]
    })
+```
+
+```{r redomore}
+csstates = bplapply( files(ermaset), function(x) {
+    imp = import(x, which=uil33)
+    imp$rgb = erma:::rgbByState(imp$name)
+    imp
+})
+tys = cellTypes(ermaset)
+csstates = bplapply( 1:length(csstates), function(x) {
+   csstates[[x]]$celltype=tys[x]
+   csstates[[x]]
+})
 ```
 Finally, a rough visualization with ggplot2.
 ```{r doviz, fig=TRUE}
