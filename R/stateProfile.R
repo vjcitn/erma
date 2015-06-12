@@ -5,7 +5,7 @@ stateProfile = function(ermaset, symbol="IL33", width=50000,
    uil = flank(resize(range(mod), 1), width=width)+extension
    
    ## ----bind----------------------------------------------------------------
-   rowRanges(ermaset) = uil
+   ermaset@rowRanges = uil
    ## ----getcss--------------------------------------------------------------
    csstates = lapply(reduceByFile(ermaset, MAP=function(range, file) {
      imp = import(file, which=range)

@@ -106,7 +106,7 @@ uil33
 ```
 Bind this to the ErmaSet instance.
 ```{r bind}
-rowRanges(ermaset) = uil33
+ermaset@rowRanges = uil33  # rowRanges<- is broken 5/16
 ermaset
 ```
 
@@ -127,6 +127,8 @@ csstates = lapply(1:length(csstates), function(x) {
 ```
 
 ```{r redomore}
+library(BiocParallel)
+register(MulticoreParam(workers=2))
 csstates = bplapply( files(ermaset), function(x) {
     imp = import(x, which=uil33)
     imp$rgb = erma:::rgbByState(imp$name)
