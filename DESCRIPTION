@@ -1,6 +1,6 @@
 Package: erma
 Title: epigenomic road map adventures
-Version: 0.1.0
+Version: 0.1.1
 Author: VJ Carey <stvjc@channing.harvard.edu>
 Description: Software and data to support
 	epigenomic road map adventures.
