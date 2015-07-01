@@ -5,6 +5,8 @@ import(GenomicRanges)
 import(Homo.sapiens)
 import(BiocGenerics)
 
+importClassFrom(GenomicFiles, "GenomicFiles")
+
 export(genemodel, makeErmaSet, stateProfile, stateProf,
    mapmeta, cellTypes)
 
