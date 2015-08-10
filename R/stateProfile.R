@@ -22,9 +22,10 @@ stateProfile = function(ermaset, symbol="IL33", width=50000,
    
    ## ----doviz, fig=TRUE-----------------------------------------------------
    cssgr = unlist(GRangesList(csstates))
-#   data(short_celltype)
-   short_celltype = get(load(dir(system.file("data",package="erma"),full.names=TRUE, pattern="short")))
-   states_25 = get(load(dir(system.file("data",package="erma"),full.names=TRUE, pattern="states_25")))
+   if (!exists("short_celltype")) data(short_celltype)
+#   short_celltype = get(load(dir(system.file("data",package="erma"),full.names=TRUE, pattern="short")))
+#   states_25 = get(load(dir(system.file("data",package="erma"),full.names=TRUE, pattern="states_25")))
+    if (!exists("states_25")) data(states_25)
 #   data(states_25)
    mycol = states_25$rgb
    names(mycol) = paste0(1:25, "_", states_25$MNEMONIC)

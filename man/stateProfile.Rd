@@ -12,7 +12,7 @@ for a family of cell types managed in an ErmaSet instance.
 }
 \usage{
 stateProfile(ermaset, symbol = "IL33", width = 50000, ctsize = 7, shortCellType = TRUE)
-stateProf()
+stateProf(ermaset)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
