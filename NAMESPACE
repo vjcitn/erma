@@ -1,11 +1,10 @@
 import(methods)
 import(ggplot2)
-import(GenomicFiles)
 import(GenomicRanges)
+import(GenomicFiles)
 import(Homo.sapiens)
 import(BiocGenerics)
-
-importClassFrom(GenomicFiles, "GenomicFiles")
+importFrom(Biobase, selectSome)
 
 export(genemodel, makeErmaSet, stateProfile, stateProf,
    mapmeta, cellTypes)
