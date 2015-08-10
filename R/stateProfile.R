@@ -8,7 +8,8 @@ stateProfile = function(ermaset, symbol="IL33", width=50000,
    ermaset@rowRanges = uil
    ## ----getcss--------------------------------------------------------------
    csstates = lapply(reduceByFile(ermaset, MAP=function(range, file) {
-     imp = import(file, which=range)
+     imp = import(file, which=range, genome=genome(range))
+     seqlevels(imp) = seqlevels(range)
      imp$rgb = rgbByState(imp$name)
      imp
    }), "[[", 1) 
