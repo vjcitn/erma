@@ -7,7 +7,7 @@ import(BiocGenerics)
 importFrom(Biobase, selectSome)
 
 export(genemodel, makeErmaSet, stateProfile, stateProf,
-   mapmeta, cellTypes)
+   mapmeta, cellTypes, geneTxRange)
 
 importClassFrom("S4Vectors", "DataFrame")
 importFrom("S4Vectors", "DataFrame")
