@@ -1,6 +1,7 @@
 \name{stateProfile}
 \alias{stateProfile}
 \alias{stateProf}
+\alias{csProfile}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 create a ggplot2 visualization of chromatin states over genomic addresses
@@ -11,11 +12,11 @@ Create a ggplot2 visualization of chromatin states over genomic addresses
 for a family of cell types managed in an ErmaSet instance.
 }
 \usage{
-stateProfile(ermaset, symbol = "IL33", width = 50000, ctsize = 7, shortCellType = TRUE)
-stateProf(ermaset)
+stateProfile(ermaset, symbol = "IL33", width = 50000, ctsize = 10, 
+   shortCellType = TRUE, orient5p = TRUE)
+stateProf(ermaset, ctsize=8, shortCellType=TRUE)
 csProfile(ermaset, symbol, flanksize=10000, useShiny=FALSE,
     ctsize=10, shortCellType=TRUE, orient5p=TRUE) 
-
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,6 +39,10 @@ ad hoc abbreviations are used for facet labeling
   \item{useShiny}{logical; if TRUE, shiny app is run permitting
 interactive selection of gene, width to view, and orientation
 (upstream or downstream of transcribed range)}
+  \item{orient5p}{logical; if TRUE, interval viewed
+is 5' to the transcription interval (upstream, typical promoter
+element location); if FALSE, interval is 3' to the transcription interval.
+This orientation respects the strandedness of the gene model.}
 }
 %\details{
 %stateProf is a demonstration shiny app calling stateProfile

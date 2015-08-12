@@ -3,13 +3,9 @@ title: "erma: epigenomics road map adventures"
 author: "Vincent J. Carey, stvjc at channing.harvard.edu"
 date: "August 2015"
 output:
-  BiocStyle::pdf_document:
-    toc: yes
-    number_sections: yes
   BiocStyle::html_document:
     highlight: pygments
     number_sections: yes
-    theme: united
     toc: yes
 ---
 
@@ -118,41 +114,32 @@ Now query the files for cell-specific states in this interval.
 ```{r getcss}
 library(BiocParallel)
 register(MulticoreParam(workers=2))  # reduce will be done according to registered bpparam; lapply just extracts
+suppressWarnings({
 csstates = lapply(reduceByFile(ermaset, MAP=function(range, file) {
-  imp = import(file, which=range)
+  imp = import(file, which=range, genome=genome(range)[1])
+  seqlevels(imp) = seqlevels(range)
   imp$rgb = erma:::rgbByState(imp$name)
   imp
 }), "[[", 1) 
+})
 tys = cellTypes(ermaset)  # need to label with cell types
 csstates = lapply(1:length(csstates), function(x) {
    csstates[[x]]$celltype = tys[x]
    csstates[[x]]
    })
+csstates[1:2]
 ```
 
-```{r redomore, eval=FALSE, echo=FALSE}
-library(BiocParallel)
-register(MulticoreParam(workers=2))
-csstates = bplapply( files(ermaset), function(x) {
-    imp = import(x, which=uil33)
-    imp$rgb = erma:::rgbByState(imp$name)
-    imp
-})
-tys = cellTypes(ermaset)
-csstates = bplapply( 1:length(csstates), function(x) {
-   csstates[[x]]$celltype=tys[x]
-   csstates[[x]]
-})
-```
-
-We have a static visualization for any subset of cell types.
+This sort of code underlies
+the `csProfile` utility to visualize variation in state assignments
+in promoter regions for various genes.
 
 ```{r doviz, fig=TRUE}
 csProfile(ermaset[,1:5], symbol="CD28", useShiny=FALSE)
 ```
 
 Set `useShiny` to `TRUE` to permit interactive selection of
-region to profile.
+region to visualize.
 
 
 

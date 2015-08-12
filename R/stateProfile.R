@@ -22,10 +22,10 @@ csProfile = function(ermaset, symbol, flanksize=10000, useShiny=FALSE,
 }
 
 stateProfile = function(ermaset, symbol="IL33", width=50000,
-    ctsize=10, shortCellType=TRUE, extension=0, orient5p = TRUE) {
+    ctsize=10, shortCellType=TRUE, orient5p = TRUE) {
    mod = try(genemodel(symbol))
    if (inherits(mod, "try-error")) stop("can't resolve symbol")
-   uil = flank(resize(range(mod), 1), start=orient5p, width=width)+extension
+   uil = flank(resize(range(mod), 1), start=orient5p, width=width)
    
    ## ----bind----------------------------------------------------------------
    ermaset@rowRanges = uil
