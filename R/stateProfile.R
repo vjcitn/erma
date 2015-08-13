@@ -21,11 +21,11 @@ csProfile = function(ermaset, symbol, flanksize=10000, useShiny=FALSE,
      else stateProf(ermaset=ermaset, shortCellType=shortCellType, ctsize=ctsize)
 }
 
-stateProfile = function(ermaset, symbol="IL33", width=50000,
-    ctsize=10, shortCellType=TRUE, orient5p = TRUE) {
+stateProfile = function(ermaset, symbol="IL33", upstream=2000,
+     downstream=200, ctsize=10, shortCellType=TRUE) {
    mod = try(genemodel(symbol))
    if (inherits(mod, "try-error")) stop("can't resolve symbol")
-   uil = flank(resize(range(mod), 1), start=orient5p, width=width)
+   uil = promoters(range(mod), upstream=upstream, downstream=downstream) #flank(resize(range(mod), 1), start=orient5p, width=width)
    
    ## ----bind----------------------------------------------------------------
    ermaset@rowRanges = uil
@@ -61,7 +61,7 @@ stateProfile = function(ermaset, symbol="IL33", width=50000,
        theme(strip.text.y = element_text(size = ctsize, angle = 0)) +
         ylim(0,1) + scale_y_continuous(breaks=NULL, limits=c(0,1)) +
         scale_fill_manual( name="state", values=mycol ) + xlab(chrn) +
-        ggtitle(paste0(symbol, " [", as.character(strand(mod)[1]), "] ", "(", floor(width/1000), "kb ", ifelse(orient5p, "upstream", "downstream"), ")"))
+        ggtitle(paste0(symbol, " [", as.character(strand(mod)[1]), "]"))
 }
    
 
