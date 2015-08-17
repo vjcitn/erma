@@ -70,6 +70,7 @@ if useShiny is FALSE, an instance of c("gg", "ggplot") is returned
 %}
 \examples{
 ermaset = makeErmaSet()
-stateProfile(ermaset[,1:5], "CD28")
+# set useShiny=TRUE for interactive display
+csProfile(ermaset[,1:5], "CD28")
 }
 \keyword{ models }

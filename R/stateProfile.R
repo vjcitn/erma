@@ -28,14 +28,18 @@ stateProfile = function(ermaset, symbol="IL33", upstream=2000,
 #     imp
 #   })
    range = rowRanges(ermaset)
-   csstates = foreach(i = 1:length(files(ermaset))) %dopar% {
-     file = files(ermaset)[i]
-     imp = liberalImport(file, which=range, genome=genome(range))
+   fe = files(ermaset)
+   csstates = foreach(i = 1:length(fe)) %dopar% {
+#     path = files(ermaset)[i]
+#     con = file(path)
+#     open(con, type="r")
+#     on.exit(close(con))
+     imp = liberalImport(fe[i], which=range, genome=genome(range))
      seqlevels(imp) = seqlevels(range)
      imp$rgb = rgbByState(imp$name)
      imp
    }
-   #csstates = lapply(imps, "[[", 1) # only one range
+#   csstates = lapply(imps, "[[", 1) # only one range
    tys = cellTypes(ermaset)  # need to label with cell types
    ## ---- annotate
    csstates = lapply(1:length(csstates), function(x) {
