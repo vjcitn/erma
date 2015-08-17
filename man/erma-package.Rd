@@ -36,5 +36,5 @@ Maintainer: \packageMaintainer{erma}
 data(farhSE)
 farhSE
 ee = makeErmaSet()
-stateProfile(ee[,1:4], symbol="A2M", orient5p=TRUE)
+stateProfile(ee[,1:4], symbol="A2M")
 }

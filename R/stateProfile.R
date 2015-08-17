@@ -1,47 +1,55 @@
 
-#liberalImport = function(con, which, pad=1e5, genome, ...) {
- # intention is to import request plus padding so
- # that result can be trimmed to fill out the 
- # where region with any relevant metadata
-# stopifnot(is(which, "GRanges"))
-# tmp = import(con, which=which+pad, genome=genome, ...)
- #restrict(tmp, start=start(which), end=end(which),
- #   keep.all.ranges=TRUE)
-# subsetByOverlaps(tmp, which)
-#}
-
-csProfile = function(ermaset, symbol, flanksize=10000, useShiny=FALSE,
-    ctsize=10, shortCellType=TRUE, orient5p=TRUE) {
+csProfile = function(ermaset, symbol, upstream=2000, downstream=200,
+    useShiny=FALSE,
+    ctsize=10, shortCellType=TRUE, tsswidth=3) {
 #
-# chromatin state profile: 5p end of gene txstart to flanksize nt upstream
+# chromatin state profile: use IRanges 'promoters' concept to pick
+#   states and colors from ChromImpute resources
 #
      if (!useShiny) stateProfile( ermaset=ermaset, 
-             symbol=symbol, ctsize=ctsize, width=flanksize, 
-             shortCellType=shortCellType, orient5p=orient5p )
+             symbol=symbol, ctsize=ctsize, upstream=2000, downstream=200,
+             shortCellType=shortCellType)
      else stateProf(ermaset=ermaset, shortCellType=shortCellType, ctsize=ctsize)
 }
 
 stateProfile = function(ermaset, symbol="IL33", upstream=2000,
-     downstream=200, ctsize=10, shortCellType=TRUE) {
+     downstream=200, ctsize=10, shortCellType=TRUE, tsswidth=3) {
    mod = try(genemodel(symbol))
+   tss = start(resize(range(mod),1))
    if (inherits(mod, "try-error")) stop("can't resolve symbol")
-   uil = promoters(range(mod), upstream=upstream, downstream=downstream) #flank(resize(range(mod), 1), start=orient5p, width=width)
-   
+   uil = promoters(range(mod), upstream=upstream, downstream=downstream) 
    ## ----bind----------------------------------------------------------------
-   ermaset@rowRanges = uil
+   ermaset@rowRanges = uil  # binding this in allows reduceByFile to work
    ## ----getcss--------------------------------------------------------------
-   csstates = lapply(reduceByFile(ermaset, MAP=function(range, file) {
+#   imps = reduceByFile(ermaset, MAP=function(range, file) {
+#     imp = liberalImport(file, which=range, genome=genome(range))
+#     seqlevels(imp) = seqlevels(range)
+#     imp$rgb = rgbByState(imp$name)
+#     imp
+#   })
+   range = rowRanges(ermaset)
+   csstates = foreach(i = 1:length(files(ermaset))) %dopar% {
+     file = files(ermaset)[i]
      imp = liberalImport(file, which=range, genome=genome(range))
      seqlevels(imp) = seqlevels(range)
      imp$rgb = rgbByState(imp$name)
      imp
-   }), "[[", 1) 
+   }
+   #csstates = lapply(imps, "[[", 1) # only one range
    tys = cellTypes(ermaset)  # need to label with cell types
    ## ---- annotate
    csstates = lapply(1:length(csstates), function(x) {
       csstates[[x]]$celltype = tys[x]
+      len = length(csstates[[x]])
+      csstates[[x]] = c(csstates[[x]], csstates[[x]][len]) # dummy
+      ranges(csstates[[x]][len+1]) = IRanges(tss,width=tsswidth)
+      csstates[[x]]$name[len+1] = "TSS"
+      csstates[[x]]$rgb[len+1] = "#000000"
+      #print(range(mod))
+      #print(csstates[[x]])
       csstates[[x]]
       })
+
    
    ## ----doviz, fig=TRUE-----------------------------------------------------
    cssgr = unlist(GRangesList(csstates))
@@ -52,6 +60,7 @@ stateProfile = function(ermaset, symbol="IL33", upstream=2000,
 #   data(states_25)
    mycol = states_25$rgb
    names(mycol) = paste0(1:25, "_", states_25$MNEMONIC)
+   mycol = c(mycol, "TSS"="#000000")
    cssd = as.data.frame(cssgr)
    chrn = as.character(seqnames(cssgr))[1]
    if (shortCellType) cssd$celltype = short_celltype[ cssd$celltype ]
@@ -68,7 +77,7 @@ stateProfile = function(ermaset, symbol="IL33", upstream=2000,
 liberalImport = function(con, which, pad=1e5, genome, ...) {
  # intention is to import request plus padding so
  # that result can be trimmed to fill out the 
- # where region with any relevant metadata
+ # 'which' region with any relevant metadata
  stopifnot(is(which, "GRanges"))
  tmp = import(con, which=which+pad, genome=genome, ...)
  tmp = restrict(tmp, start=start(which), end=end(which),
@@ -76,3 +85,13 @@ liberalImport = function(con, which, pad=1e5, genome, ...) {
  tmp[ which(end(tmp) >= start(which) & start(tmp) <= end(which)) ]
 # subsetByOverlaps(tmp, which)
 }
+
+subsetByRanges = function( ermaset, range ) {
+   rowRanges(ermaset) = range
+   reduceByFile(ermaset, MAP=function(range, file) {
+   imp = import(file, which=range, genome=genome(range))
+   seqlevels(imp) = seqlevels(range)
+   imp$rgb = rgbByState(imp$name)
+   imp })
+}
+

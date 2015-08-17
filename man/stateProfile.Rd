@@ -12,11 +12,12 @@ Create a ggplot2 visualization of chromatin states over genomic addresses
 for a family of cell types managed in an ErmaSet instance.
 }
 \usage{
-stateProfile(ermaset, symbol = "IL33", width = 50000, ctsize = 10, 
-   shortCellType = TRUE, orient5p = TRUE)
-stateProf(ermaset, ctsize=8, shortCellType=TRUE)
-csProfile(ermaset, symbol, flanksize=10000, useShiny=FALSE,
-    ctsize=10, shortCellType=TRUE, orient5p=TRUE) 
+stateProfile(ermaset, symbol = "IL33", upstream = 2000, 
+   downstream = 200, ctsize = 10, 
+   shortCellType = TRUE )
+stateProf(ermaset, ctsize=10, shortCellType=TRUE)
+csProfile(ermaset, symbol, upstream = 2000, downstream = 200, 
+    useShiny=FALSE, ctsize=10, shortCellType=TRUE )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,8 +27,9 @@ instance of \code{\link[erma]{ErmaSet-class}}
   \item{symbol}{
 gene symbol resolvable in \code{\link[Homo.sapiens]{Homo.sapiens}}
 }
-  \item{width, flanksize}{
-width of region upstream of gene to be visualized
+  \item{upstream, downstream}{
+parameters passed to \code{\link[GenomicRanges]{promoters}} to
+limit region to view
 }
   \item{ctsize}{
 font size for cell type labels
@@ -37,12 +39,7 @@ logical, if FALSE, full cell type labels are used, otherwise
 ad hoc abbreviations are used for facet labeling
 }
   \item{useShiny}{logical; if TRUE, shiny app is run permitting
-interactive selection of gene, width to view, and orientation
-(upstream or downstream of transcribed range)}
-  \item{orient5p}{logical; if TRUE, interval viewed
-is 5' to the transcription interval (upstream, typical promoter
-element location); if FALSE, interval is 3' to the transcription interval.
-This orientation respects the strandedness of the gene model.}
+interactive selection of gene, and scope of view}
 }
 %\details{
 %stateProf is a demonstration shiny app calling stateProfile
