@@ -26,3 +26,11 @@ genemodel = function(key, keytype="SYMBOL", annoResource=Homo.sapiens) {
   ans
 }
 
+map2range = function(maptag="17q12", annoResource=Homo.sapiens) {
+  t1 = select(annoResource, keys=maptag, keytype="MAP", columns=
+      c("TXSTART", "TXEND", "TXCHROM"))
+  ans = GRanges(t1$TXCHROM[1], IRanges(min(t1$TXSTART), max(t1$TXEND)))
+  si = seqinfo(annoResource)
+  seqinfo(ans) = si[t1$TXCHROM[1],]
+  ans
+}

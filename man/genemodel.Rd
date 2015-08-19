@@ -11,6 +11,7 @@ create GRanges instance with model for a gene
 \usage{
 genemodel(key, keytype, annoResource = Homo.sapiens)
 geneTxRange(sym, annoResource = Homo.sapiens)
+map2range(maptag="17q12", annoResource = Homo.sapiens)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,6 +21,9 @@ symbol used as key into \code{annoResource} with keytype SYMBOL
   \item{key}{
 string used as key into \code{annoResource} with keytype \code{keytype}
 }
+  \item{maptag}{
+string used as key into \code{annoResource} with keytype MAP
+}
   \item{keytype}{
 string used as keytype for \code{select} with \code{annoResource} 
 }
@@ -27,9 +31,11 @@ string used as keytype for \code{select} with \code{annoResource}
 OrganismDb instance
 }
 }
-%\details{
-%%  ~~ If necessary, more details than the description above ~~
-%}
+\details{
+map2range will obtain all TXSTART and TXEND for genes identified 
+through select with key maptag and return a single range with
+min TXSTART and max TXEND
+}
 \value{
 a \code{\link[GenomicRanges]{GRanges}} instance
 %%  ~Describe the value returned
@@ -59,6 +65,7 @@ geneTxRange added Aug 10 2015.
 \examples{
 genemodel("IL33")
 geneTxRange("IL33")
+map2range("17q12")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
