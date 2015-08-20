@@ -1,6 +1,7 @@
 \name{erma-package}
 \alias{erma-package}
 \alias{erma}
+\alias{farhSE}
 \docType{package}
 \title{
 \packageTitle{erma}

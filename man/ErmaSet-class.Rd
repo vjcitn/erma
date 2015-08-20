@@ -8,7 +8,7 @@
 
 \title{Class \code{"ErmaSet"}}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the class is. ~~
+Wrap a GenomicFiles instance representing roadmap bed files.
 }
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{new("ErmaSet", ...)}.
@@ -28,7 +28,7 @@ Simple extension of GenomicFiles.
 \section{Extends}{
 Class \code{"\link[GenomicFiles]{GenomicFiles-class}"}, directly.
 Class \code{"\link[SummarizedExperiment]{RangedSummarizedExperiment-class}"}, by class "GenomicFiles", distance 2.
-Class \code{"\linkS4class{SummarizedExperiment0}"}, by class "GenomicFiles", distance 3.
+Class \code{"\link[SummarizedExperiment]{SummarizedExperiment0-class}"}, by class "GenomicFiles", distance 3.
 Class \code{"\linkS4class{Vector}"}, by class "GenomicFiles", distance 4.
 Class \code{"\linkS4class{Annotated}"}, by class "GenomicFiles", distance 5.
 }

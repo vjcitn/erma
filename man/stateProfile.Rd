@@ -14,8 +14,8 @@ for a family of cell types managed in an ErmaSet instance.
 \usage{
 stateProfile(ermaset, symbol = "IL33", upstream = 2000, 
    downstream = 200, ctsize = 10, 
-   shortCellType = TRUE )
-stateProf(ermaset, ctsize=10, shortCellType=TRUE)
+   shortCellType = TRUE, tsswidth=3 )
+stateProf(ermaset, shortCellType=TRUE, ctsize=10)
 csProfile(ermaset, symbol, upstream = 2000, downstream = 200, 
     useShiny=FALSE, ctsize=10, shortCellType=TRUE )
 }
@@ -40,6 +40,8 @@ ad hoc abbreviations are used for facet labeling
 }
   \item{useShiny}{logical; if TRUE, shiny app is run permitting
 interactive selection of gene, and scope of view}
+  \item{tsswidth}{width in base pairs of the base of a black
+rectangle used to depict location of transcription start site}
 }
 %\details{
 %stateProf is a demonstration shiny app calling stateProfile

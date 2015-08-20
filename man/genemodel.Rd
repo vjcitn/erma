@@ -1,6 +1,7 @@
 \name{genemodel}
 \alias{genemodel}
 \alias{geneTxRange}
+\alias{map2range}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 create GRanges instance with model for a gene

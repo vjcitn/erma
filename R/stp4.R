@@ -24,11 +24,10 @@ ver = R.version
  rowRanges = rowData
  assign("rowRanges<-", get("rowData<-"), .GlobalEnv)
 }
-library(shiny)
-library(ggplot2)
-library(GenomicRanges)
-library(Homo.sapiens)
-library(erma)
+requireNamespace("shiny")
+requireNamespace("ggplot2")
+requireNamespace("GenomicRanges")
+requireNamespace("Homo.sapiens")
 #ermaset = makeErmaSet()
 short_celltype = get(load(dir(
     system.file("data",package="erma"),full.names=TRUE, pattern="short")))
