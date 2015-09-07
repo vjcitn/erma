@@ -7,11 +7,11 @@ ver = R.version
  rowRanges = rowData
  assign("rowRanges<-", get("rowData<-"), .GlobalEnv)
 }
-library(shiny)
-library(ggplot2)
-library(GenomicRanges)
-library(Homo.sapiens)
-library(erma)
+#library(shiny)
+#library(ggplot2)
+#library(GenomicRanges)
+#library(Homo.sapiens)
+#library(erma)
 ermaset = makeErmaSet()[,4:17]
 availSyms = keys(Homo.sapiens, keytype="SYMBOL")
 availSyms = sort(availSyms[grep("^[A-Z]", availSyms)])

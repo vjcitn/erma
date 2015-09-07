@@ -16,9 +16,11 @@ stateProfile(ermaset, symbol = "IL33", upstream = 2000,
    downstream = 200, ctsize = 10, 
    shortCellType = TRUE, tsswidth=3 )
 stateProf(ermaset, shortCellType=TRUE, ctsize=10)
-csProfile(ermaset, symbol, upstream = 2000, downstream = 200, 
-    useShiny=FALSE, ctsize=10, shortCellType=TRUE )
+csProfile(ermaset, symbol, upstream = 2000, downstream = 200,
+                 useShiny = FALSE, ctsize = 10, shortCellType = TRUE,
+                 tsswidth = 3)
 }
+
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ermaset}{

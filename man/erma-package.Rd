@@ -2,6 +2,8 @@
 \alias{erma-package}
 \alias{erma}
 \alias{farhSE}
+\alias{abbCIcols}
+\alias{abbCIstates}
 \docType{package}
 \title{
 \packageTitle{erma}
@@ -38,4 +40,5 @@ data(farhSE)
 farhSE
 ee = makeErmaSet()
 stateProfile(ee[,1:4], symbol="A2M")
+abbCIcols
 }
