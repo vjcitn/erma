@@ -40,5 +40,6 @@ data(farhSE)
 farhSE
 ee = makeErmaSet()
 stateProfile(ee[,1:4], symbol="A2M")
+data(abbCIcols)
 abbCIcols
 }
