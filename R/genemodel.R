@@ -5,7 +5,7 @@ genemodelOLD = function (sym, genome = "hg19", annoResource = Homo.sapiens,
     stopifnot(is.atomic(sym) && (length(sym) == 1))
     if (!exists(dsa <- deparse(substitute(annoResource)))) 
         require(dsa, character.only = TRUE)
-    num = select(annoResource, keys = sym, keytype = "SYMBOL", 
+    num = AnnotationDbi::select(annoResource, keys = sym, keytype = "SYMBOL", 
         columns = c("ENTREZID", "SYMBOL"))$ENTREZID
     getter(annoResource, by = byattr)[[num]]
 }
@@ -16,7 +16,7 @@ genemodel = function(key, keytype="SYMBOL", annoResource=Homo.sapiens) {
 # propagate seqinfo from annotation resource
 #
   oblig=c("EXONCHROM", "EXONSTART", "EXONEND", "EXONSTRAND", "EXONID")
-  addrs = select(annoResource, keys=key, keytype=keytype, columns=oblig)
+  addrs = AnnotationDbi::select(annoResource, keys=key, keytype=keytype, columns=oblig)
   ans = GRanges(addrs$EXONCHROM, IRanges(addrs$EXONSTART, addrs$EXONEND),
       strand=addrs$EXONSTRAND, exon_id=addrs$EXONID)
   mcols(ans)[[keytype]] = key
@@ -27,7 +27,7 @@ genemodel = function(key, keytype="SYMBOL", annoResource=Homo.sapiens) {
 }
 
 map2range = function(maptag="17q12", annoResource=Homo.sapiens) {
-  t1 = select(annoResource, keys=maptag, keytype="MAP", columns=
+  t1 = AnnotationDbi::select(annoResource, keys=maptag, keytype="MAP", columns=
       c("TXSTART", "TXEND", "TXCHROM"))
   ans = GRanges(t1$TXCHROM[1], IRanges(min(t1$TXSTART), max(t1$TXEND)))
   si = seqinfo(annoResource)
