@@ -1,12 +1,12 @@
 import(methods)
 import(foreach)
 import(shiny)
-import(ggplot2)
+import(BiocGenerics)
 import(GenomicRanges)
 import(SummarizedExperiment)
+importFrom(SummarizedExperiment, colData)
 import(GenomicFiles)
 import(Homo.sapiens)
-import(BiocGenerics)
 importFrom(Biobase, selectSome)
 
 export(genemodel, makeErmaSet, stateProfile, stateProf,
@@ -16,3 +16,8 @@ importClassFrom("S4Vectors", "DataFrame")
 importFrom("S4Vectors", "DataFrame")
 exportClass("ErmaSet")
 importFrom("rtracklayer", "import")
+
+importFrom(ggplot2, ggplot, geom_rect, aes,
+   facet_grid, theme, element_text, scale_y_continuous,
+   scale_fill_manual, xlab, ggtitle, ylim)
+
