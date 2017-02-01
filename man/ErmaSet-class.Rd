@@ -20,7 +20,7 @@ Simple extension of GenomicFiles.
     \item{\code{rowRanges}:}{Object of class \code{"GenomicRangesORGRangesList"} ~~ }
     \item{\code{colData}:}{Object of class \code{"DataFrame"} ~~ }
     \item{\code{assays}:}{Object of class \code{"Assays"} ~~ }
-    \item{\code{NAMES}:}{Object of class \code{"characterORNULL"} ~~ }
+    \item{\code{NAMES}:}{Object of class \code{"character_OR_NULL"} ~~ }
     \item{\code{elementMetadata}:}{Object of class \code{"DataFrame"} ~~ }
     \item{\code{metadata}:}{Object of class \code{"list"} ~~ }
   }
