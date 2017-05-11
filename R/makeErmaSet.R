@@ -19,3 +19,10 @@ makeErmaSet = function() {
  ermaset@colData = mm[ftags,]
  new("ErmaSet", ermaset)
 }
+
+setMethod("show", "ErmaSet", function(object) {
+    callNextMethod()
+    cat("cellTypes() for type names; data(short_celltype) for abbr.\n")
+})
+
+

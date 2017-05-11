@@ -15,7 +15,7 @@ for a family of cell types managed in an ErmaSet instance.
 stateProfile(ermaset, symbol = "IL33", upstream = 2000, 
    downstream = 200, ctsize = 10, 
    shortCellType = TRUE, tsswidth=3 )
-stateProf(ermaset, shortCellType=TRUE, ctsize=10)
+stateProf(ermaset, shortCellType=TRUE, ctsize=10, iniSym="IL7R")
 csProfile(ermaset, symbol, upstream = 2000, downstream = 200,
                  useShiny = FALSE, ctsize = 10, shortCellType = TRUE,
                  tsswidth = 3)

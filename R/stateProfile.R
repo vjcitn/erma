@@ -93,9 +93,61 @@ liberalImport = function(con, which, pad=1e5, genome, ...) {
 subsetByRanges = function( ermaset, range ) {
    rowRanges(ermaset) = range
    reduceByFile(ermaset, MAP=function(range, file) {
-   imp = import(file, which=range, genome=genome(range))
+   imp = import(file, which=range, genome=genome(range)[1])
    seqlevels(imp) = seqlevels(range)
    imp$rgb = rgbByState(imp$name)
    imp })
 }
 
+statesByRange = function(ermaset, rangeToUse,
+     ctsize=10, shortCellType=TRUE, tsswidth=3) {
+   if (inherits(mod, "try-error")) stop("can't resolve symbol")
+   uil = promoters(range(mod), upstream=upstream, downstream=downstream) 
+   ## ----bind----------------------------------------------------------------
+   ermaset@rowRanges = uil  # binding this in allows reduceByFile to work
+   ## ----getcss--------------------------------------------------------------
+#   imps = reduceByFile(ermaset, MAP=function(range, file) {
+#     imp = liberalImport(file, which=range, genome=genome(range))
+#     seqlevels(imp) = seqlevels(range)
+#     imp$rgb = rgbByState(imp$name)
+#     imp
+#   })
+   range = rangeToUse
+   fe = files(ermaset)
+   csstates = foreach(i = 1:length(fe)) %dopar% {
+#     path = files(ermaset)[i]
+#     con = file(path)
+#     open(con, type="r")
+#     on.exit(close(con))
+     imp = liberalImport(fe[i], which=range, genome=genome(range))
+     seqlevels(imp) = seqlevels(range)
+     imp$rgb = rgbByState(imp$name)
+     imp
+   }
+   tys = cellTypes(ermaset)  # need to label with cell types
+   ## ---- annotate
+   csstates = lapply(1:length(csstates), function(x) {
+      csstates[[x]]$celltype = tys[x]
+      len = length(csstates[[x]])
+      csstates[[x]] = c(csstates[[x]], csstates[[x]][len]) # dummy
+      ranges(csstates[[x]][len+1]) = IRanges(tss,width=tsswidth)
+      csstates[[x]]$name[len+1] = "TSS"
+      csstates[[x]]$rgb[len+1] = "#000000"
+      #print(range(mod))
+      #print(csstates[[x]])
+      csstates[[x]]
+      })
+
+   
+   ## ----doviz, fig=TRUE-----------------------------------------------------
+   cssgr = unlist(GRangesList(csstates))
+   if (!exists("short_celltype")) data(short_celltype)
+#   short_celltype = get(load(dir(system.file("data",package="erma"),full.names=TRUE, pattern="short")))
+#   states_25 = get(load(dir(system.file("data",package="erma"),full.names=TRUE, pattern="states_25")))
+    if (!exists("states_25")) data(states_25)
+#   data(states_25)
+   mycol = states_25$rgb
+   names(mycol) = paste0(1:25, "_", states_25$MNEMONIC)
+   mycol = c(mycol, "TSS"="#000000")
+   cssgr
+}

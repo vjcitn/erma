@@ -10,7 +10,8 @@ import(Homo.sapiens)
 importFrom(Biobase, selectSome)
 
 export(genemodel, makeErmaSet, stateProfile, stateProf,
-   mapmeta, cellTypes, geneTxRange, csProfile, map2range)
+   mapmeta, cellTypes, geneTxRange, csProfile, map2range,
+   subsetByRanges)
 
 importClassFrom("S4Vectors", "DataFrame")
 importFrom("S4Vectors", "DataFrame")

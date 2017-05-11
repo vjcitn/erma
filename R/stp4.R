@@ -17,7 +17,7 @@ setMethod("shortNames", "ErmaSet", function(x) {
 })
  
  
-stateProf = function(ermaset, shortCellType=TRUE, ctsize=10) {
+stateProf = function(ermaset, shortCellType=FALSE, ctsize=10, iniSym="IL7R") {
 message("NOTE: takes some time to initialize for 40000 promoter regions")
 ver = R.version
  if (ver$minor <= "1.3") {
@@ -39,18 +39,18 @@ ui = fluidPage(titlePanel("ChromImpute state profiles"),
 # should be selectize
 #
    fluidRow(column(2,selectizeInput('sym', 'Gene symbol', choices=NULL,
-           selected="CD28", options=list(placeholder="CD28"),
+           selected=iniSym, options=list(placeholder=iniSym),
            multiple=FALSE)),
    column(2,numericInput('upstr', 'Upstream', value=2000)),
    column(2,numericInput('downstr', 'Downstream', value=200)),
-   column(2,selectInput('short', 'Celltype format?', selected="short",
+   column(2,selectInput('short', 'Celltype format?', selected="long",
               choices=c("short", "long")))),
    fluidRow( plotOutput('plot') )
    )
 
 server = function(input, output, session) {
    INI = reactive({
-      if (is.null(input$sym) | nchar(input$sym)==0) return("CD28")
+      if (is.null(input$sym) | nchar(input$sym)==0) return(iniSym)
       else input$sym
       })
    output$plot = renderPlot({
