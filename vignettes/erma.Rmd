@@ -99,7 +99,7 @@ datatable(as.data.frame(colData(ermaset)[,kpc]))
 # Enumerating states in the vicinity of a gene, across cell types
 
 We form a GRanges representing 50kb upstream of IL33.
-```{r getgm, cache=TRUE}
+```{r getgm, cache=FALSE}
 uil33 = flank(resize(range(genemodel("IL33")), 1), width=50000)
 uil33
 ```
@@ -113,7 +113,7 @@ Now query the files for cell-specific states in this interval.
 
 ```{r getcss}
 library(BiocParallel)
-register(MulticoreParam(workers=2))  # reduce will be done according to registered bpparam; lapply just extracts
+register(MulticoreParam(workers=2))
 suppressWarnings({
 csstates = lapply(reduceByFile(ermaset, MAP=function(range, file) {
   imp = import(file, which=range, genome=genome(range)[1])

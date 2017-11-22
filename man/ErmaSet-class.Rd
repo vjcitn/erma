@@ -5,6 +5,7 @@
 \alias{cellTypes,ErmaSet-method}
 \alias{makeErmaSet}
 \alias{cellTypes}
+\alias{subsetByRanges}
 
 \title{Class \code{"ErmaSet"}}
 \description{
@@ -43,6 +44,17 @@ Class \code{"\linkS4class{Annotated}"}, by class "GenomicFiles", distance 5.
 %\author{
 %%  ~~who you are~~
 %}
+
+\usage{
+makeErmaSet()
+subsetByRanges( ermaset, range )
+}
+\arguments{
+ \item{ermaset}{an instance of \code{\link{ErmaSet-class}}}
+ \item{range}{an instance of \code{\link[GenomicRanges]{GRanges-class}}}
+}
+
+
 \note{
 We would like to have methods for AnnotationHub entities too.
 }

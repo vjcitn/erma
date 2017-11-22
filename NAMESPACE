@@ -1,7 +1,7 @@
 import(methods)
-import(foreach)
 import(shiny)
 import(BiocGenerics)
+import(BiocParallel)
 import(GenomicRanges)
 import(SummarizedExperiment)
 importFrom(SummarizedExperiment, colData)

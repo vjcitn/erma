@@ -7,7 +7,7 @@ csProfile = function(ermaset, symbol, upstream=2000, downstream=200,
 #   states and colors from ChromImpute resources
 #
      if (!useShiny) stateProfile( ermaset=ermaset, 
-             symbol=symbol, ctsize=ctsize, upstream=2000, downstream=200,
+             symbol=symbol, ctsize=ctsize, upstream=upstream, downstream=downstream,
              shortCellType=shortCellType)
      else stateProf(ermaset=ermaset, shortCellType=shortCellType, ctsize=ctsize)
 }
@@ -29,7 +29,7 @@ stateProfile = function(ermaset, symbol="IL33", upstream=2000,
 #   })
    range = rowRanges(ermaset)
    fe = files(ermaset)
-   csstates = foreach(i = 1:length(fe)) %dopar% {
+   csstates = bplapply( 1:length(fe), function(i) {
 #     path = files(ermaset)[i]
 #     con = file(path)
 #     open(con, type="r")
@@ -38,9 +38,12 @@ stateProfile = function(ermaset, symbol="IL33", upstream=2000,
      seqlevels(imp) = seqlevels(range)
      imp$rgb = rgbByState(imp$name)
      imp
-   }
-#   csstates = lapply(imps, "[[", 1) # only one range
+   })
+   chk = vapply(csstates, length, numeric(1))
+   ok = which(chk>0)
+   csstates = csstates[ok]
    tys = cellTypes(ermaset)  # need to label with cell types
+   tys = tys[ok]
    ## ---- annotate
    csstates = lapply(1:length(csstates), function(x) {
       csstates[[x]]$celltype = tys[x]
@@ -114,7 +117,7 @@ statesByRange = function(ermaset, rangeToUse,
 #   })
    range = rangeToUse
    fe = files(ermaset)
-   csstates = foreach(i = 1:length(fe)) %dopar% {
+   csstates = bplapply(1:length(fe), function(i) {
 #     path = files(ermaset)[i]
 #     con = file(path)
 #     open(con, type="r")
@@ -123,7 +126,7 @@ statesByRange = function(ermaset, rangeToUse,
      seqlevels(imp) = seqlevels(range)
      imp$rgb = rgbByState(imp$name)
      imp
-   }
+   })
    tys = cellTypes(ermaset)  # need to label with cell types
    ## ---- annotate
    csstates = lapply(1:length(csstates), function(x) {

@@ -36,6 +36,9 @@ limit region to view
   \item{ctsize}{
 font size for cell type labels
 }
+  \item{iniSym}{
+a character(1) gene symbol
+}
   \item{shortCellType}{
 logical, if FALSE, full cell type labels are used, otherwise
 ad hoc abbreviations are used for facet labeling

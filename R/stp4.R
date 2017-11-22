@@ -17,7 +17,7 @@ setMethod("shortNames", "ErmaSet", function(x) {
 })
  
  
-stateProf = function(ermaset, shortCellType=FALSE, ctsize=10, iniSym="IL7R") {
+stateProf = function(ermaset, shortCellType=TRUE, ctsize=10, iniSym="IL7R") {
 message("NOTE: takes some time to initialize for 40000 promoter regions")
 ver = R.version
  if (ver$minor <= "1.3") {

@@ -10,7 +10,8 @@ create GRanges instance with model for a gene
 create GRanges instance with model for a gene
 }
 \usage{
-genemodel(key, keytype, annoResource = Homo.sapiens)
+genemodel(key, keytype, annoResource = Homo.sapiens,
+   keepStandardChromosomes=TRUE)
 geneTxRange(sym, annoResource = Homo.sapiens)
 map2range(maptag="17q12", annoResource = Homo.sapiens)
 }
@@ -29,7 +30,11 @@ string used as key into \code{annoResource} with keytype MAP
 string used as keytype for \code{select} with \code{annoResource} 
 }
   \item{annoResource}{
-OrganismDb instance
+OrganismDb instance; genemodel will also work with an EnsDb instance
+}
+  \item{keepStandardChromosomes}{
+if true, will eliminate non-standard chromosomes using
+the eponymous function from GenomeInfoDb, with pruning.mode = 'coarse'
 }
 }
 \details{
