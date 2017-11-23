@@ -1,4 +1,8 @@
 import(methods)
+import(IRanges)
+import(GenomeInfoDb)
+importFrom(utils, read.csv, data)
+importFrom(AnnotationDbi, keys)
 import(shiny)
 import(BiocGenerics)
 import(BiocParallel)
