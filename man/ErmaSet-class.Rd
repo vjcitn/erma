@@ -27,9 +27,9 @@ Simple extension of GenomicFiles.
   }
 }
 \section{Extends}{
-Class \code{"\link[GenomicFiles]{GenomicFiles-class}"}, directly.
-Class \code{"\link[SummarizedExperiment]{RangedSummarizedExperiment-class}"}, by class "GenomicFiles", distance 2.
-Class \code{"\link[SummarizedExperiment]{SummarizedExperiment-class}"}, by class "GenomicFiles", distance 3.
+Class \code{"\link{GenomicFiles-class}"}, directly.
+Class \code{"\link{RangedSummarizedExperiment-class}"}, by class "GenomicFiles", distance 2.
+Class \code{"\link{SummarizedExperiment-class}"}, by class "GenomicFiles", distance 3.
 Class \code{"\linkS4class{Vector}"}, by class "GenomicFiles", distance 4.
 Class \code{"\linkS4class{Annotated}"}, by class "GenomicFiles", distance 5.
 }
@@ -51,7 +51,7 @@ subsetByRanges( ermaset, range )
 }
 \arguments{
  \item{ermaset}{an instance of \code{\link{ErmaSet-class}}}
- \item{range}{an instance of \code{\link[GenomicRanges]{GRanges-class}}}
+ \item{range}{an instance of \code{\link{GRanges-class}}}
 }
 
 

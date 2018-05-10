@@ -24,13 +24,13 @@ csProfile(ermaset, symbol, upstream = 2000, downstream = 200,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ermaset}{
-instance of \code{\link[erma]{ErmaSet-class}}
+instance of \code{\link{ErmaSet-class}}
 }
   \item{symbol}{
-gene symbol resolvable in \code{\link[Homo.sapiens]{Homo.sapiens}}
+gene symbol resolvable in \code{\link{Homo.sapiens}}
 }
   \item{upstream, downstream}{
-parameters passed to \code{\link[GenomicRanges]{promoters}} to
+parameters passed to \code{\link{promoters}} to
 limit region to view
 }
   \item{ctsize}{

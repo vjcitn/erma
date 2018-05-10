@@ -18,7 +18,7 @@ originates at
 \url{https://docs.google.com/spreadsheet/ccc?key=0Am6FxqAtrFDwdHU1UC13ZUxKYy1XVEJPUzV6MEtQOXc&usp=sharing#gid=15}
 }
 \value{
-a \code{\link[S4Vectors]{DataFrame}} instance that is wrapped
+a \code{\link{DataFrame}} instance that is wrapped
 to limit sprawl over columns when shown.
 }
 %\references{

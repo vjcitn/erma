@@ -43,7 +43,7 @@ through select with key maptag and return a single range with
 min TXSTART and max TXEND
 }
 \value{
-a \code{\link[GenomicRanges]{GRanges}} instance
+a \code{\link{GRanges}} instance
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
