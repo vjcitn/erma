@@ -1,6 +1,6 @@
 Package: erma
 Title: epigenomic road map adventures
-Version: 0.15.0
+Version: 0.99.0
 Author: VJ Carey <stvjc@channing.harvard.edu>
 Description: Software and data to support
 	epigenomic road map adventures.
@@ -13,5 +13,5 @@ Imports: rtracklayer (>= 1.38.1), S4Vectors, BiocGenerics,
 Maintainer: VJ Carey <stvjc@channing.harvard.edu>
 License: Artistic-2.0
 LazyLoad: yes
-BiocViews: epigenetics, panomics, annotation, chipseq
+BiocViews: Epigenetics, panomics, Annotation, ChIPSeq
 VignetteBuilder: knitr
