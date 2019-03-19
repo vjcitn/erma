@@ -1,0 +1,28 @@
+import(methods)
+import(IRanges)
+import(GenomeInfoDb)
+importFrom(utils, read.csv, data)
+importFrom(AnnotationDbi, keys)
+import(shiny)
+import(BiocGenerics)
+import(BiocParallel)
+import(GenomicRanges)
+import(SummarizedExperiment)
+importFrom(SummarizedExperiment, colData)
+import(GenomicFiles)
+import(Homo.sapiens)
+importFrom(Biobase, selectSome)
+
+export(genemodel, makeErmaSet, stateProfile, stateProf,
+   mapmeta, cellTypes, geneTxRange, csProfile, map2range,
+   subsetByRanges)
+
+importClassFrom("S4Vectors", "DataFrame")
+importFrom("S4Vectors", "DataFrame")
+exportClass("ErmaSet")
+importFrom("rtracklayer", "import")
+
+importFrom(ggplot2, ggplot, geom_rect, aes,
+   facet_grid, theme, element_text, scale_y_continuous,
+   scale_fill_manual, xlab, ggtitle, ylim)
+
